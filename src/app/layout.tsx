@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-// @ts-ignore
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,15 +11,21 @@ export const metadata: Metadata = {
     title: "ClipText AI",
   },
   icons: {
-    apple: "/pic.png", // This generates the <link rel="apple-touch-icon" ... />
+    // Use your single icon.png as the main favicon
+    // (Next.js will generate <link rel="icon" href="/icon.png" ... /> automatically)
+    icon: "/icon.png",
+
+    // Use pic.png from /public/ as Apple touch icon
+    // (generates <link rel="apple-touch-icon" href="/pic.png" ... />)
+    apple: "/pic.png",
   },
 };
 
-export const viewport = {
-  themeColor: "#09090b", // This handles the meta tag correctly
+export const viewport: Viewport = {
+  themeColor: "#09090b",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  // maximumScale: 1,  ← commented out – better UX if you allow pinch-zoom on mobile
 };
 
 export default function RootLayout({
@@ -30,12 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="theme-color" content="#09090b" />
-        <link rel="apple-touch-icon" href="/icon-192.png" />
-      </head>
+      {/* No <head> manual tags needed – Next.js injects everything from metadata + viewport */}
       <body className="antialiased font-sans">
-        {/* font-sans defaults to Arial/Helvetica/system-ui */}
         {children}
       </body>
     </html>
