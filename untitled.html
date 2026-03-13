@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Login Test</title>
+</head>
+<body>
+  <button id="googleBtn">Sign in with Google</button>
+
+  <!-- Load Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    // Wait until the window loads to ensure the GSI script is ready
+    window.onload = () => {
+      // Check if the `google` object exists
+      if (typeof google === "undefined") {
+        console.error("Google SDK not loaded yet!");
+        return;
+      }
+
+      const clientId = "834958669558-070j76r6a619c0t523p7llq9qv579s1r.apps.googleusercontent.com";
+
+      // Initialize Google Sign-In
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: (response) => {
+          console.log("JWT ID Token:", response.credential);
+        },
+      });
+
+      // Attach the button click to show the One Tap prompt
+      document.getElementById("googleBtn").onclick = () => {
+        google.accounts.id.prompt();
+      };
+    };
+  </script>
+</body>
+</html>

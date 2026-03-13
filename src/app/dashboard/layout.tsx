@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import DashboardClient from "./DashboardClient";
+import InstallPWA from "@/components/InstallPWA";
 
 // This sets the browser tab title and description
 export const metadata: Metadata = {
@@ -12,5 +13,10 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <DashboardClient>{children}</DashboardClient>;
+  return(
+    <div className="relative min-h-screen">
+    <DashboardClient>{children}</DashboardClient>
+    <InstallPWA />
+    </div>
+  );
 }
