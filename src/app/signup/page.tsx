@@ -35,20 +35,23 @@ export default function SignupPage() {
         username: data.username,
         email: data.email,
         password: data.password,
+        password2: data.confirmPassword,
       });
 
       if (response.status === 201) {
         setIsSuccess(true);
         setTimeout(() => router.push("/login"), 3000);
       }
-    } catch (error: any) {
-      const message =
-        error?.response?.data?.error ||
-        error?.response?.data?.detail ||
-        "Signup failed. Please try again.";
-      console.error("Django says:", error.response?.data);
-      setError("root", { message });
-    }
+    }catch (error: any) {
+    // This will help you see the EXACT error from Django in your UI
+    const message =
+      error?.response?.data?.error || 
+      error?.response?.data?.detail || 
+      JSON.stringify(error?.response?.data) || // Catch-all for validation dicts
+      "Signup failed. Please try again.";
+
+    setError("root", { message });
+  }
   };
 
   if (isSuccess) {
