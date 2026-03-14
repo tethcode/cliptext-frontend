@@ -46,7 +46,7 @@ export default function SignupPage() {
         error?.response?.data?.error ||
         error?.response?.data?.detail ||
         "Signup failed. Please try again.";
-
+      console.error("Django says:", error.response?.data);
       setError("root", { message });
     }
   };
