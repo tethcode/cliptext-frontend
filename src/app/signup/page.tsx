@@ -35,7 +35,7 @@ export default function SignupPage() {
         username: data.username,
         email: data.email,
         password: data.password,
-        password2: data.confirmPassword,
+        confirmPassword: data.confirmPassword,
       });
 
       if (response.status === 201) {
